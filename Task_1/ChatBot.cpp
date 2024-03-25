@@ -1,15 +1,22 @@
 #include<iostream>
 #include<string>
 #include<algorithm>
+#include <regex>
 using namespace std;
 
+// Function to get response based on user input
 string getResponse(const string& userInput) {
+    // Predefined patterns and responses
+    regex hiRegex("hi|hello|hey|yup|listen", regex_constants::icase);
+    regex howAreYouRegex("how are you\\?|how do you do", regex_constants::icase);
+    regex byeRegex("bye|goodbye|go away|good bye", regex_constants::icase);
+
     // Pattern matching and response selection
-    if (userInput == "hello" || userInput == "hey" || userInput == "hi" || userInput == "yup" || userInput == "listen") {
+    if (regex_search(userInput, hiRegex)) {
         return "Hello! How can I assist you?";
-    } else if (userInput == "how are you\\?" || userInput == "how do you do\\?") {
+    } else if (regex_search(userInput, howAreYouRegex)) {
         return "I'm just a chatbot, but thanks for asking!";
-    } else if (userInput == "bye" || userInput == "go away" || userInput == "goodbye" || userInput == "good bye") {
+    } else if (regex_search(userInput, byeRegex)) {
         return "Goodbye! Have a great day!";
     } else {
         return "I'm sorry, I didn't understand that.";
