@@ -40,7 +40,7 @@ string getResponse(const string &userInput)
     }
     else if (regex_search(userInput, whoAreYouRegex))
     {
-        return "I'm your trusty chatbot, Think of me as your digital sidekick, ready to engage in conversation, and help you navigate the vast expanse of the internet. \nSo, what can I do for you today?";
+        return "I'm your trusty chatbot, Think of me as your digital sidekick, ready to engage in conversation, and \nhelp you navigate the vast expanse of the internet. So, what can I do for you today?";
     }
     else if (regex_search(userInput, goodNightRegex))
     {
