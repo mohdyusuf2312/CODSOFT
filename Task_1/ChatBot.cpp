@@ -4,12 +4,13 @@
 #include <regex>
 using namespace std;
 
+regex byeRegex("bye|goodbye|go away|good bye|see you", regex_constants::icase);
 // Function to get response based on user input
 string getResponse(const string& userInput) {
     // Predefined patterns and responses
-    regex hiRegex("hi|hello|hey|yup|listen", regex_constants::icase);
+    regex hiRegex("hi|hello|hey|yup|listen|start|let's start|let start", regex_constants::icase);
     regex howAreYouRegex("how are you\\?|how do you do", regex_constants::icase);
-    regex byeRegex("bye|goodbye|go away|good bye", regex_constants::icase);
+    
 
     // Pattern matching and response selection
     if (regex_search(userInput, hiRegex)) {
@@ -32,10 +33,15 @@ int main() {
         cout << "You: ";
         getline(cin, userInput);
         transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower); // Convert input to lowercase
-        if (userInput == "bye" || userInput == "Goodbye" || userInput == "see you") {
+        if(regex_search(userInput, byeRegex))
+        {
             cout << "Chatbot: Goodbye! Have a great day!\n";
             break;
         }
+        // if (userInput == "bye" || userInput == "Goodbye" || userInput == "see you") {
+        //     cout << "Chatbot: Goodbye! Have a great day!\n";
+        //     break;
+        // }
         
         string response = getResponse(userInput);
         cout << "Chatbot: " << response << endl;
