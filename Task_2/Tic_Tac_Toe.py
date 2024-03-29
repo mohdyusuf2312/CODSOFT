@@ -20,3 +20,13 @@ def print_board(turn, board, aiturn):
     print(board[3] + "|" + board[4] + "|" + board[5])
     print(board[6] + "|" + board[7] + "|" + board[8])
     print("Turn :" + str(turn))
+
+
+def player_move(turn, board, aiturn):
+    choice = input("Enter your move (0-8): ")
+
+
+def ai_move(turn, board, aiturn, corner):
+    data = []
+
+print_board(turn, board, aiturn)
