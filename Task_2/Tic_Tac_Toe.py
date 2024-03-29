@@ -1,7 +1,7 @@
 import random
 
 print("Welcome to the unbeatable Tic Tac Toe")
-print("The board is set up like this : ")
+print("The board's index values are: ")
 print("0|1|2")
 print("3|4|5")
 print("6|7|8")
@@ -20,4 +20,3 @@ def print_board(turn, board, aiturn):
     print(board[3] + "|" + board[4] + "|" + board[5])
     print(board[6] + "|" + board[7] + "|" + board[8])
     print("Turn :" + str(turn))
-    
