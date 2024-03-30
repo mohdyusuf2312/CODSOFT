@@ -32,11 +32,29 @@ def player_move(turn, board, aiturn):
     choice = input("Enter your move (0-8): ")
     board[int(choice)] = "X" # update board when player's move have done.
     turn = "AI" # change turn to AI, now its ai_move
+    check_win(turn, board, aiturn)
 
+def check_win(turn, board, aiturn):
+    for n in pairs:
+        first = board[n[0]]
+        second = board[n[1]]
+        third = board[n[2]]
+        if first == second and second == third:
+            if first == "O":
+                print("You lose! AI win")
+            if first == "X": # This instruction will never run because this program is write for unbeatable Tic Tac Toe
+                print("You win!")
+        else:
+            filled_space =0
+            for x in range(8):
+                if board[x] != " " and board[x] != "_":
+                    filled_space +=1
+                if filled_space == 8:
+                    print("It's draw! You can't win.")
 
+    print_board(turn, board, aiturn)
 
 def ai_move(turn, board, aiturn, corner):
     data = []
-
 
 print_board(turn, board, aiturn)
