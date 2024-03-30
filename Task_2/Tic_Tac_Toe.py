@@ -1,5 +1,7 @@
 import random
+from logo import logo
 
+print(logo)
 print("Welcome to the unbeatable Tic Tac Toe")
 print("The board's index values are: ")
 print("0|1|2")
