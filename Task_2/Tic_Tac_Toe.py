@@ -57,6 +57,23 @@ def check_win(turn, board, aiturn):
     print_board(turn, board, aiturn)
 
 def ai_move(turn, board, aiturn, corner):
-    data = []
+    already_moved = False
+
+    def corner_choice(corner, board, already_moved):
+        best_choices = []
+        if not already_moved:
+            for n in corner:
+                if board[n] == " " or board[n] == "_":
+                    best_choices.append(n)
+            board[random.choice(best_choices)] = "O"
+
+    if aiturn == 1:
+        if board[4] != "X": #to check whether that middle space is already moved by the player or not if not that taken by the ai, or if taken by the player then ai have to move corner move
+            board[4] == "O" #Middle move by ai
+            already_moved = True
+        else:
+            corner_choice(corner, board, already_moved)
+            already_moved = True
+    check_win(turn, board, aiturn)
 
 print_board(turn, board, aiturn)
