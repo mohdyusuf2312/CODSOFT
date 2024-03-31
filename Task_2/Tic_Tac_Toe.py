@@ -37,7 +37,7 @@ def player_move(turn, board, aiturn):
     check_win(turn, board, aiturn)
 
 def check_win(turn, board, aiturn):
-    for n in pairs:
+    for n in pairs: 
         first = board[n[0]]
         second = board[n[1]]
         third = board[n[2]]
@@ -74,7 +74,35 @@ def ai_move(turn, board, aiturn, corner):
         else:
             corner_choice(corner, board, already_moved)
             already_moved = True
-
+    else:
+        for n in pairs: #Offensive
+            if board[n[0]] == "O" and board[n[1]] == "O" and board[n[2]] != "X":
+                board[n[2]] = "O"
+                already_moved = True
+                break
+            if board[n[0]] == "O" and board[n[2]] == "O" and board[n[1]] != "X":
+                board[n[1]] = "O"
+                already_moved = True
+                break
+            if board[n[1]] == "O" and board[n[2]] == "O" and board[n[0]] != "X":
+                board[n[0]] = "O"
+                already_moved = True
+                break
+            
+        for n in pairs: #Defensive
+            if board[n[0]] == "X" and board[n[1]] == "X" and board[n[2]] != "O":
+                board[n[2]] = "O"
+                already_moved = True
+                break
+            if board[n[0]] == "X" and board[n[2]] == "X" and board[n[1]] != "O":
+                board[n[1]] = "O"
+                already_moved = True
+                break
+            if board[n[1]] == "X" and board[n[2]] == "X" and board[n[0]] != "O":
+                board[n[0]] = "O"
+                already_moved = True
+                break
+            
     turn = "PLAYER"
     check_win(turn , board, aiturn)
 
