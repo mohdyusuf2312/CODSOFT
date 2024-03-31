@@ -1,4 +1,5 @@
 import random
+import sys
 from logo import logo
 
 print(logo)
@@ -9,15 +10,15 @@ print("3|4|5")
 print("6|7|8")
 print("Enter your move, 0 through 8. (You are X's and AI is O's) ")
 
-board = ["_","_","_","_","_","_"," "," "," "] #Board horizontal lines
+board = ["_","_","_","_","_","_"," "," "," "] #Board horizontal and vertical lines
 pairs = ([0,3,6],[1,4,7],[2,4,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]) #Win Pairs
-corner = [0,2,6,8] #corner of the board
+corner = [0,2,6,8] #corner is used for the AI to let it pick random corner.
 
 turn = "PLAYER"
 
 aiturn = 0 #number of turn of ai
 
-def print_board(turn, board, aiturn):
+def print_board(turn, board, aiturn): #to print the board and start the next turn
     print(board[0] + "|" + board[1] + "|" + board[2])
     print(board[3] + "|" + board[4] + "|" + board[5])
     print(board[6] + "|" + board[7] + "|" + board[8])
@@ -41,11 +42,13 @@ def check_win(turn, board, aiturn):
         first = board[n[0]]
         second = board[n[1]]
         third = board[n[2]]
-        if first == second and second == third:
+        if first == second and second == third: #Check XXX and OOO are formed or not
             if first == "O":
                 print("You lose! AI win")
+                end() #To stop the game
             if first == "X": # This instruction will never run because this program is write for unbeatable Tic Tac Toe
                 print("You win!")
+                end() #To stop the game
         else:
             filled_space =0
             for x in range(8):
@@ -53,8 +56,16 @@ def check_win(turn, board, aiturn):
                     filled_space +=1
                 if filled_space == 8:
                     print("It's draw! You can't win.")
-
+                    end() #To stop the game
+    #If game is not completed yet, then move to the next turn by calling print_board method
     print_board(turn, board, aiturn)
+
+def end(): #To end the game and print final board
+    print ("Here is the final board.")
+    print (board[0] + "|" + board[1] + "|" + board[2])
+    print (board[3] + "|" + board[4] + "|" + board[5])
+    print (board[6] + "|" + board[7] + "|" + board[8])
+    sys.exit(0)
 
 def ai_move(turn, board, aiturn, corner):
     already_moved = False
@@ -74,7 +85,7 @@ def ai_move(turn, board, aiturn, corner):
         else:
             corner_choice(corner, board, already_moved)
             already_moved = True
-    else:
+    else: # To check if there is any winning or lose condition
         for n in pairs: #Offensive
             if board[n[0]] == "O" and board[n[1]] == "O" and board[n[2]] != "X":
                 board[n[2]] = "O"
@@ -90,18 +101,19 @@ def ai_move(turn, board, aiturn, corner):
                 break
             
         for n in pairs: #Defensive
-            if board[n[0]] == "X" and board[n[1]] == "X" and board[n[2]] != "O":
-                board[n[2]] = "O"
-                already_moved = True
-                break
-            if board[n[0]] == "X" and board[n[2]] == "X" and board[n[1]] != "O":
-                board[n[1]] = "O"
-                already_moved = True
-                break
-            if board[n[1]] == "X" and board[n[2]] == "X" and board[n[0]] != "O":
-                board[n[0]] = "O"
-                already_moved = True
-                break
+            if already_moved == False:
+                if board[n[0]] == "X" and board[n[1]] == "X" and board[n[2]] != "O":
+                    board[n[2]] = "O"
+                    already_moved = True
+                    break
+                if board[n[0]] == "X" and board[n[2]] == "X" and board[n[1]] != "O":
+                    board[n[1]] = "O"
+                    already_moved = True
+                    break
+                if board[n[1]] == "X" and board[n[2]] == "X" and board[n[0]] != "O":
+                    board[n[0]] = "O"
+                    already_moved = True
+                    break
 
     if not already_moved:
         if aiturn == 2 and board[4] == "X":
@@ -113,7 +125,7 @@ def ai_move(turn, board, aiturn, corner):
             sides = [1,3,5,7]
             player_sides = 0
             for n in sides:
-                if board[n] == "O":
+                if board[n] == "X":
                     player_sides += 1
             if player_sides >= 1:
                 corner_choice(corner, board, already_moved)
