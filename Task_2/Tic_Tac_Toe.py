@@ -102,7 +102,30 @@ def ai_move(turn, board, aiturn, corner):
                 board[n[0]] = "O"
                 already_moved = True
                 break
-            
+
+    if not already_moved:
+        if aiturn == 2 and board[4] == "X":
+            corner_choice(corner, board, already_moved)
+        else:
+            # P|_|_ <-- where P: Player and A: AI
+            # _|A|_  Else instruction is for this type of condition
+            #  | |P
+            sides = [1,3,5,7]
+            player_sides = 0
+            for n in sides:
+                if board[n] == "O":
+                    player_sides += 1
+            if player_sides >= 1:
+                corner_choice(corner, board, already_moved)
+            else:
+                best_choices = []
+                for n in sides:
+                    best_choices.append(n)
+                if best_choices == []:
+                    corner_choice(corner, board, already_moved)
+                else:
+                    board[random.choice(best_choices)] = "O"
+
     turn = "PLAYER"
     check_win(turn , board, aiturn)
 
