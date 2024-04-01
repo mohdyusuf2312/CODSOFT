@@ -11,7 +11,7 @@ print("6|7|8")
 print("Enter your move, 0 through 8. (You are X's and AI is O's) ")
 
 board = ["_","_","_","_","_","_"," "," "," "] #Board horizontal and vertical lines
-pairs = ([0,3,6],[1,4,7],[2,4,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]) #Win Pairs
+pairs = ([0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]) #Win Pairs
 corner = [0,2,6,8] #corner is used for the AI to let it pick random corner.
 
 turn = "PLAYER"
@@ -39,7 +39,7 @@ def player_move(turn, board, aiturn):
     if choice.isdigit() == False:
         print("Input should be an integer")
         player_move(turn, board, aiturn)
-    if board[choice] == "O" or board[choice] == "X":
+    if board[int(choice)] == "O" or board[int(choice)] == "X":
         print("This space is already taken, choose another one please")
         player_move(turn, board, aiturn)
     else:
