@@ -1,6 +1,6 @@
 import random
 import sys
-from logo import logo
+import logo as l
 import os
 
 def clear_console():        # For clear the consol
@@ -15,7 +15,8 @@ def start():            #  To start the program
     clear_console()
     print("Welcome to the unbeatable Tic Tac Toe")
     print("The board's index values are: ")
-    print(logo)
+    print(l.logo)
+    print(l.instruction)
     # print("0|1|2")                # These lines now moved in the logo.py file
     # print("3|4|5")
     # print("6|7|8")
@@ -40,7 +41,8 @@ aiturn = 0 #number of turn of ai
 
 def print_board(turn, board, aiturn): #to print the board and start the next turn
     clear_console()
-    print(logo)
+    print(l.logo)
+    print(l.instruction)
     print(board[0] + "|" + board[1] + "|" + board[2])
     print(board[3] + "|" + board[4] + "|" + board[5])
     print(board[6] + "|" + board[7] + "|" + board[8])
@@ -95,7 +97,8 @@ def check_win(turn, board, aiturn):
 
 def end(): #To end the game and print final board
     clear_console()
-    print(logo)
+    print(l.logo)
+    print(l.instruction)
     print ("Thank you! Here is the final board.")
     print (board[0] + "|" + board[1] + "|" + board[2])
     print (board[3] + "|" + board[4] + "|" + board[5])
