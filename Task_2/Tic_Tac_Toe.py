@@ -56,18 +56,18 @@ def print_board(turn, board, aiturn): #to print the board and start the next tur
         player_move(turn, board, aiturn)
 
 def player_move(turn, board, aiturn):
-    choice = input("Enter your move (0-8): ")
-    if int(choice) < 0 or int(choice) > 8:
-        print("Input should be in range (0 <= input <= 8)")
-        player_move(turn, board, aiturn)
+    choice = input("Enter your move (1-9): ")
     if choice.isdigit() == False:
         print("Input should be an integer")
         player_move(turn, board, aiturn)
-    if board[int(choice)] == "O" or board[int(choice)] == "X":
+    if int(choice)-1 < 0 or int(choice)-1 > 8:
+        print("Input should be in range (1 <= input <= 9)")
+        player_move(turn, board, aiturn)
+    if board[int(choice)-1] == "O" or board[int(choice)-1] == "X":
         print("This space is already taken, choose another one please")
         player_move(turn, board, aiturn)
     else:
-        board[int(choice)] = "X" # update board when player's move have done.
+        board[int(choice)-1] = "X" # update board when player's move have done.
         
     turn = "AI" # change turn to AI, now its ai_move
     check_win(turn, board, aiturn)
