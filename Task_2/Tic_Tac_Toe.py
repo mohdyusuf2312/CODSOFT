@@ -176,7 +176,28 @@ def ai_move(turn, board, aiturn, corner):
         for n in sides:
             if board[n] == "X":
                 player_side_moved.append(n)
-        if aiturn == 2 and len(player_side_moved) == 2:             #I add this if statement because here is one special case where ai will lose.
+
+        if aiturn == 2 and len(player_side_moved) == 1:             #I add this if statement because here is one special case where ai will lose.
+            if board[1] == "X" and board[6] == "X":                 # _|P|_
+                board[0] = "O"                                      # _|A|_
+            elif board[1] == "X"   and board[8] == "X":             # P| |A
+                board[0] = "O"                                      # To prevent this condition occured
+            elif board[5] == "X" and board[0] == "X":
+                board[2] = "O"
+            elif board[5] == "X" and board[6] == "X":
+                board[2] = "O"
+            elif board[7] == "X" and board[0] == "X":
+                board[6] = "O"
+            elif board[7] == "X" and board[2] == "X":
+                board[6] = "O"
+            elif board[3] == "X" and board[2] == "X":
+                board[0] = "O"
+            elif board[3] == "X" and board[8] == "X":
+                board[0] = "O"
+            else:
+                corner_choice(corner, board, already_moved)
+
+        elif aiturn == 2 and len(player_side_moved) == 2:             #I add this if statement because here is one special case where ai will lose.
             if board[7] == "X" and board[5] == "X":                 # A|_|_
                 board[2] = "O"                                      # _|A|P
             elif board[7] == "X"   and board[3] == "X":             #  |P| 
@@ -185,16 +206,16 @@ def ai_move(turn, board, aiturn, corner):
                 board[0] = "O"
             elif board[1] == "X" and board[3] == "X":
                 board[6] = "O"
+            else:
+                corner_choice(corner, board, already_moved)
+
         elif aiturn == 2 and board[4] == "X":
             corner_choice(corner, board, already_moved)
         else:
-            # _|P|P         <-- where P: Player and A: AI
-            # P|A|_         Else instruction is for check side spaces then move side_move method
-            # A| | 
-            # sides = [1,3,5,7]         # moved to the global
-            player_sides = 0
-            for n in sides:
-                if board[n] == "X":
+            # sides = [1,3,5,7]      # moved to the global
+            player_sides = 0                # _|P|P         <-- where P: Player and A: AI
+            for n in sides:                 # P|A|_         Else instruction is for check side spaces then move side_move method
+                if board[n] == "X":         # A| | 
                     player_sides += 1
             if player_sides >= 1:
                 corner_choice(corner, board, already_moved)
