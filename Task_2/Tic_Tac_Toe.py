@@ -13,8 +13,8 @@ def clear_console():        # For clear the consol
 
 def start():            #  To start the program
     clear_console()
-    print("Welcome to the unbeatable Tic Tac Toe")
-    print("The board's index values are: ")
+    # print("Welcome to the unbeatable Tic Tac Toe")
+    # print("The board's index values are: ")
     print(l.logo)
     print(l.instruction)
     # print("0|1|2")                # These lines now moved in the logo.py file
@@ -72,17 +72,20 @@ def player_move(turn, board, aiturn):
     turn = "AI" # change turn to AI, now its ai_move
     check_win(turn, board, aiturn)
 
+result = ""
+
 def check_win(turn, board, aiturn):
+    global result
     for n in pairs: 
         first = board[n[0]]
         second = board[n[1]]
         third = board[n[2]]
         if first == second and second == third: #Check XXX and OOO are formed or not
             if first == "O":
-                print("You lose! AI win")
+                result = "You lose! AI win"
                 end() #To stop the game
             if first == "X": # This instruction will never run because this program is write for unbeatable Tic Tac Toe
-                print("You win!")
+                result = "You win!"
                 end() #To stop the game
         else:
             filled_space =0
@@ -90,7 +93,7 @@ def check_win(turn, board, aiturn):
                 if board[x] != " " and board[x] != "_":
                     filled_space +=1
                 if filled_space == 8:
-                    print("It's draw! You can't win.")
+                    result = "It's draw! You can't win."
                     end() #To stop the game
     #If game is not completed yet, then move to the next turn by calling print_board method
     print_board(turn, board, aiturn)
@@ -99,6 +102,7 @@ def end(): #To end the game and print final board
     clear_console()
     print(l.logo)
     print(l.instruction)
+    print(result)
     print ("Thank you! Here is the final board.")
     print (board[0] + "|" + board[1] + "|" + board[2])
     print (board[3] + "|" + board[4] + "|" + board[5])
@@ -168,11 +172,24 @@ def ai_move(turn, board, aiturn, corner):
                     break
 
     if not already_moved:
-        if aiturn == 2 and board[4] == "X":
+        player_side_moved = []
+        for n in sides:
+            if board[n] == "X":
+                player_side_moved.append(n)
+        if aiturn == 2 and len(player_side_moved) == 2:             #I add this if statement because here is one special case where ai will lose.
+            if board[7] == "X" and board[5] == "X":                 # A|_|_
+                board[2] = "O"                                      # _|A|P
+            elif board[7] == "X"   and board[3] == "X":             #  |P| 
+                board[0] = "O"                                      # To prevent this condition occured
+            elif board[1] == "X" and board[5] == "X":
+                board[0] = "O"
+            elif board[1] == "X" and board[3] == "X":
+                board[6] = "O"
+        elif aiturn == 2 and board[4] == "X":
             corner_choice(corner, board, already_moved)
         else:
             # _|P|P         <-- where P: Player and A: AI
-            # P|A|_         Else instruction is for this type of condition
+            # P|A|_         Else instruction is for check side spaces then move side_move method
             # A| | 
             # sides = [1,3,5,7]         # moved to the global
             player_sides = 0
