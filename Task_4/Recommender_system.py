@@ -2,8 +2,17 @@ import pandas as pd     #Import pandas to manipulate with the data
 import numpy as np      # Numpy has wide range of mathematical fuctions
 from sklearn.metrics.pairwise import cosine_similarity      #Import cosine similarity to check similarity between movies
 
-ratings = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/ratings.csv')        # Read the ratings CSV file
-movies = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/movies.csv')          # Read the movies CSV file
+logo = '''
+██████  ███████  ██████  ██████  ███    ███ ███    ███ ███████ ███    ██ ██████   █████  ████████ ██  ██████  ███    ██     ███████ ██    ██ ███████ ████████ ███████ ███    ███ 
+██   ██ ██      ██      ██    ██ ████  ████ ████  ████ ██      ████   ██ ██   ██ ██   ██    ██    ██ ██    ██ ████   ██     ██       ██  ██  ██         ██    ██      ████  ████ 
+██████  █████   ██      ██    ██ ██ ████ ██ ██ ████ ██ █████   ██ ██  ██ ██   ██ ███████    ██    ██ ██    ██ ██ ██  ██     ███████   ████   ███████    ██    █████   ██ ████ ██ 
+██   ██ ██      ██      ██    ██ ██  ██  ██ ██  ██  ██ ██      ██  ██ ██ ██   ██ ██   ██    ██    ██ ██    ██ ██  ██ ██          ██    ██         ██    ██    ██      ██  ██  ██ 
+██   ██ ███████  ██████  ██████  ██      ██ ██      ██ ███████ ██   ████ ██████  ██   ██    ██    ██  ██████  ██   ████     ███████    ██    ███████    ██    ███████ ██      ██ 
+                                                                                                                                                                                 
+'''
+
+ratings = pd.read_csv('C:/Users/LENOVO/Desktop/VS_Workspace/My_GitHub/CODSOFT/Task_4/ratings.csv')        # Read the ratings CSV file
+movies = pd.read_csv('C:/Users/LENOVO/Desktop/VS_Workspace/My_GitHub/CODSOFT/Task_4/movies.csv')          # Read the movies CSV file
 
 df = pd.merge(movies, ratings, on = "movieId")          # Merge the movies and ratings dataframes on 'movieId'
 
@@ -31,5 +40,6 @@ def recommend(movie_name):                              # Recommend method to re
         for i in similar_items:
             print(pt.index[i[0]])                   # print most similar movies on the basis of given movie
 
+print(logo)
 input = input("Enter your movie name: ")                # Take movie name from the user as input
 recommend(input)                                        # Send movie name to the recommend method
