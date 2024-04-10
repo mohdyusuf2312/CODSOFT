@@ -11,8 +11,8 @@ logo = '''
                                                                                                                                                                                  
 '''
 
-ratings = pd.read_csv('C:/Users/LENOVO/Desktop/VS_Workspace/My_GitHub/CODSOFT/Task_4/ratings.csv')        # Read the ratings CSV file
-movies = pd.read_csv('C:/Users/LENOVO/Desktop/VS_Workspace/My_GitHub/CODSOFT/Task_4/movies.csv')          # Read the movies CSV file
+ratings = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/ratings.csv')        # Read the ratings CSV file
+movies = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/movies.csv')          # Read the movies CSV file
 
 df = pd.merge(movies, ratings, on = "movieId")          # Merge the movies and ratings dataframes on 'movieId'
 
