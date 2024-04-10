@@ -36,10 +36,16 @@ def recommend(movie_name):                              # Recommend method to re
         print("This movie is out of my knowledge or less popular")
     else:
         similar_items = sorted(list(enumerate(similarity_score[index])), key = lambda x:x[1],reverse=True)[1:6]             # check similarity with other movies, and high similar value movies are store in similar_items variable
-        print("Here are 5 similar movies : ")
+        print(f"Here are 5 movies that are similar to {movie_name}: ")
         for i in similar_items:
             print(pt.index[i[0]])                   # print most similar movies on the basis of given movie
 
 print(logo)
-input = input("Enter your movie name: ")                # Take movie name from the user as input
-recommend(input)                                        # Send movie name to the recommend method
+start = True
+while start == True:
+    user_input = input("\nEnter your movie name or type 'e' for exit : ")                # Take movie name from the user as input
+    if user_input == "e" or user_input == "E":
+        print("\nThank you!")
+        start = False
+    else:
+        recommend(user_input)                                        # Send movie name to the recommend method
