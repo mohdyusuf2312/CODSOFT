@@ -2,7 +2,7 @@ import pandas as pd     #Import pandas to manipulate with the data
 import numpy as np      # Numpy has wide range of mathematical fuctions
 from sklearn.metrics.pairwise import cosine_similarity      #Import cosine similarity to check similarity between movies
 
-ratings = pd.read_csv('C:/Users/LENOVO/Desktop/VS_Workspace/PYTHON/ratings.csv')        # Read the ratings CSV file
+ratings = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/ratings.csv')        # Read the ratings CSV file
 movies = pd.read_csv('https://github.com/mohdyusuf2312/CODSOFT/blob/main/Task_4/movies.csv')          # Read the movies CSV file
 
 df = pd.merge(movies, ratings, on = "movieId")          # Merge the movies and ratings dataframes on 'movieId'
